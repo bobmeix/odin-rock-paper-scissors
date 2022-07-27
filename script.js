@@ -3,6 +3,7 @@ const paper = 'paper';
 const scissors = 'scissors';
 let playerWins = 0;
 let computerWins = 0;
+let roundCounter = 0;
 let playerName = prompt('Tell me your Name...please!');
 
 if (playerName === null) {
@@ -38,6 +39,8 @@ function getPlayerChoice() {
         playerChoice = prompt('Choose your Weapon: Rock, Paper or Scissors').toLowerCase();
         wrongInput = (playerChoice !== rock && playerChoice !== paper && playerChoice !== scissors);
     }
+    roundCounter++;
+    console.log(`Round no. ${roundCounter}`);
     console.log(`${playerName}:`, playerChoice);
     return playerChoice;
 }
@@ -79,11 +82,15 @@ function game() {
     let lessThanFiveRoundsWon = true;
 
     while (lessThanFiveRoundsWon) {
-        let roundResult = playRound(getPlayerChoice(), getComputerChoice());
+        let roundResult = playRound(getPlayerChoice(), getComputerChoice());        
+        let playerRounds = playerWins === 1 ? 'round' : 'rounds';
+        let computerRounds = computerWins === 1 ? 'round' : 'rounds';
+
         lessThanFiveRoundsWon = playerWins < 5 && computerWins < 5;
+
         console.log(roundResult);
-        console.log(`You won ${playerWins} rounds`);
-        console.log(`The computer won ${computerWins} rounds`);
+        console.log(`You won ${playerWins} ${playerRounds}`);
+        console.log(`The computer won ${computerWins} ${computerRounds}`);
         console.log('-------------------------------------------------');
     }
 
