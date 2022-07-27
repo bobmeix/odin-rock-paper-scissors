@@ -20,7 +20,7 @@ function showGameRules() {
     console.log('Choose your weapon, wisely!')
     console.log('Good luck!');
     console.log('The first one to win 5 rounds, wins the game!');
-    console.log('');
+    console.log(' ');
 }
 
 function getComputerChoice() {
