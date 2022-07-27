@@ -3,6 +3,25 @@ const paper = 'paper';
 const scissors = 'scissors';
 let playerWins = 0;
 let computerWins = 0;
+let playerName = prompt('Tell me your Name...please!');
+
+if (playerName === null) {
+    playerName = 'Player';
+}
+
+function showGameRules() {
+    console.log(`Hi ${playerName}!`);
+    console.log('Play: ROCK PAPER SCISSORS against the computer!');
+    console.log('The rules are simple:');
+    console.log('Rock beats Scissors');
+    console.log('Paper beats Rock');
+    console.log('Scissors beats Paper');
+    console.log('In case of a tie, nobody wins the round')
+    console.log('Choose your weapon, wisely!')
+    console.log('Good luck!');
+    console.log('The first one to win 5 rounds, wins the game!');
+    console.log('');
+}
 
 function getComputerChoice() {
     let randomNumber = Math.floor(Math.random() * 3);
@@ -19,7 +38,7 @@ function getPlayerChoice() {
         playerChoice = prompt('Choose your Weapon: Rock, Paper or Scissors').toLowerCase();
         wrongInput = (playerChoice !== rock && playerChoice !== paper && playerChoice !== scissors);
     }
-    console.log('Player:', playerChoice);
+    console.log(`${playerName}:`, playerChoice);
     return playerChoice;
 }
 
@@ -31,8 +50,8 @@ function playRound(playerSelection, computerSelection) {
     const youLose = `You Lose!`;
     const loseComment = ` ${computerSelectionFirstCapital} beats ${playerSelectionFirstCapital}!`;
     const tie = `It's a tie!`;
-    
-    if (playerSelection === rock && computerSelection === scissors){
+
+    if (playerSelection === rock && computerSelection === scissors) {
         playerWins++;
         return youWin + winComment;
     } else if (playerSelection === paper && computerSelection === rock) {
@@ -56,18 +75,22 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function game() {
-    console.log('The first one to win 5 rounds, wins the game!');
-    while (playerWins < 5 && computerWins < 5) {
-        let roundResult = playRound(getPlayerChoice(), getComputerChoice());        
+    showGameRules();
+    let lessThanFiveRoundsWon = true;
+
+    while (lessThanFiveRoundsWon) {
+        let roundResult = playRound(getPlayerChoice(), getComputerChoice());
+        lessThanFiveRoundsWon = playerWins < 5 && computerWins < 5;
         console.log(roundResult);
         console.log(`You won ${playerWins} rounds`);
         console.log(`The computer won ${computerWins} rounds`);
+        console.log('');
     }
 
     if (playerWins === 5) {
-        console.log('Congratulations! You won the game!');
+        console.log(`Congratulations ${playerName}! You won the game!`);
     } else if (computerWins === 5) {
-        console.log('Sorry! You lost this time!');
+        console.log(`Sorry ${playerName}! You lost this time!`);
     }
 }
 
