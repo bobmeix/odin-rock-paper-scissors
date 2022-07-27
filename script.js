@@ -20,7 +20,7 @@ function showGameRules() {
     console.log('Choose your weapon, wisely!')
     console.log('Good luck!');
     console.log('The first one to win 5 rounds, wins the game!');
-    console.log(' ');
+    console.log('-------------------------------------------------');
 }
 
 function getComputerChoice() {
@@ -84,7 +84,7 @@ function game() {
         console.log(roundResult);
         console.log(`You won ${playerWins} rounds`);
         console.log(`The computer won ${computerWins} rounds`);
-        console.log('');
+        console.log('-------------------------------------------------');
     }
 
     if (playerWins === 5) {
