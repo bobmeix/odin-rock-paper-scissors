@@ -1,6 +1,8 @@
 const rock = 'rock';
 const paper = 'paper';
 const scissors = 'scissors';
+let playerWins = 0;
+let computerWins = 0;
 
 function getComputerChoice() {
     let randomNumber = Math.floor(Math.random() * 3);
@@ -24,26 +26,49 @@ function getPlayerChoice() {
 function playRound(playerSelection, computerSelection) {
     const playerSelectionFirstCapital = playerSelection[0].toUpperCase() + playerSelection.slice(1);
     const computerSelectionFirstCapital = computerSelection[0].toUpperCase() + computerSelection.slice(1);
-    const youWin = `You Win! ${playerSelectionFirstCapital} beats ${computerSelectionFirstCapital}!`;
-    const youLose = `You Lose! ${computerSelectionFirstCapital} beats ${playerSelectionFirstCapital}!`;
+    const youWin = `You Win!`;
+    const winComment = ` ${playerSelectionFirstCapital} beats ${computerSelectionFirstCapital}!`;
+    const youLose = `You Lose!`;
+    const loseComment = ` ${computerSelectionFirstCapital} beats ${playerSelectionFirstCapital}!`;
     const tie = `It's a tie!`;
     
     if (playerSelection === rock && computerSelection === scissors){
-        return youWin;
+        playerWins++;
+        return youWin + winComment;
     } else if (playerSelection === paper && computerSelection === rock) {
-        return youWin;
+        playerWins++;
+        return youWin + winComment;
     } else if (playerSelection === scissors && computerSelection === paper) {
-        return youWin;
+        playerWins++;
+        return youWin + winComment;
     } else if (computerSelection === rock && playerSelection === scissors) {
-        return youLose;
+        computerWins++;
+        return youLose + loseComment;
     } else if (computerSelection === paper && playerSelection === rock) {
-        return youLose;
+        computerWins++;
+        return youLose + loseComment;
     } else if (computerSelection === scissors && playerSelection === paper) {
-        return youLose;
+        computerWins++;
+        return youLose + loseComment;
     } else {
         return tie;
     }
 }
 
-//console.log(getPlayerChoice(), getComputerChoice());
-console.log(playRound(getPlayerChoice(), getComputerChoice()));
+function game() {
+    console.log('The first one to win 5 rounds, wins the game!');
+    while (playerWins < 5 && computerWins < 5) {
+        let roundResult = playRound(getPlayerChoice(), getComputerChoice());        
+        console.log(roundResult);
+        console.log(`You won ${playerWins} rounds`);
+        console.log(`The computer won ${computerWins} rounds`);
+    }
+
+    if (playerWins === 5) {
+        console.log('Congratulations! You won the game!');
+    } else if (computerWins === 5) {
+        console.log('Sorry! You lost this time!');
+    }
+}
+
+game();
