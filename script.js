@@ -19,6 +19,7 @@ function showGameRules() {
     console.log('Scissors beats Paper');
     console.log('In case of a tie, nobody wins the round')
     console.log('Choose your weapon, wisely!')
+    console.log('You should type in the initials: r, p or s.')
     console.log('Good luck!');
     console.log('The first one to win 5 rounds, wins the game!');
     console.log('-------------------------------------------------');
@@ -33,13 +34,17 @@ function getComputerChoice() {
 
 function getPlayerChoice() {
     let playerChoice = prompt('Choose your Weapon: Rock, Paper or Scissors').toLowerCase();
-    let wrongInput = (playerChoice !== rock && playerChoice !== paper && playerChoice !== scissors);
+    let wrongInput = (playerChoice !== 'r' && playerChoice !== 'p' && playerChoice !== 's');
     while (wrongInput) {
-        alert('You should input one of the 3 words');
+        alert(`You should input:   r,   p   or   s.`);
         playerChoice = prompt('Choose your Weapon: Rock, Paper or Scissors').toLowerCase();
-        wrongInput = (playerChoice !== rock && playerChoice !== paper && playerChoice !== scissors);
+        wrongInput = (playerChoice !== 'r' && playerChoice !== 'p' && playerChoice !== 's');
     }
     roundCounter++;
+    playerChoice = playerChoice === 'r' ? rock :
+                   playerChoice === 'p' ? paper :
+                   playerChoice === 's' ? scissors :
+                   null;
     console.log(`Round no. ${roundCounter}`);
     console.log(`${playerName}:`, playerChoice);
     return playerChoice;
