@@ -6,7 +6,7 @@ let computerWins = 0;
 let roundCounter = 0;
 let playerName = prompt('Tell me your Name...please!');
 
-if (playerName === null) {
+if (playerName === null || playerName === '') {
     playerName = 'Player';
 }
 
