@@ -33,11 +33,11 @@ function getComputerChoice() {
 }
 
 function getPlayerChoice() {
-    let playerChoice = prompt('Choose your Weapon: Rock, Paper or Scissors').toLowerCase();
+    let playerChoice = prompt('Choose your Weapon: Rock, Paper or Scissors');
     let wrongInput = (playerChoice !== 'r' && playerChoice !== 'p' && playerChoice !== 's');
     while (wrongInput) {
         alert(`You should input:   r,   p   or   s.`);
-        playerChoice = prompt('Choose your Weapon: Rock, Paper or Scissors').toLowerCase();
+        playerChoice = prompt('Choose your Weapon: Rock, Paper or Scissors');
         wrongInput = (playerChoice !== 'r' && playerChoice !== 'p' && playerChoice !== 's');
     }
     roundCounter++;
