@@ -5,7 +5,6 @@ let playerChoice;
 let playerWins = 0;
 let computerWins = 0;
 let roundCounter = 0;
-let buttonClickCounter = 0;
 let playerName; // = prompt('Tell me your Name...please!');
 
 const rockButton = document.querySelector('#r');
@@ -20,7 +19,6 @@ if (playerName === null || playerName === '' || playerName === undefined) {
 }
 
 function getButtonValue(e) {
-    buttonClickCounter++;
     return e.target.value;
 }
 
@@ -33,7 +31,7 @@ function showGameRules() {
     console.log('Scissors beats Paper');
     console.log('In case of a tie, nobody wins the round')
     console.log('Choose your weapon, wisely!')
-    console.log('You should type in the initials: r, p or s.')
+    console.log('Push a button...')
     console.log('Good luck!');
     console.log('The first one to win 5 rounds, wins the game!');
     console.log('-------------------------------------------------');
@@ -107,7 +105,7 @@ function game(e) {
         let computerRounds = computerWins === 1 ? 'round' : 'rounds';
 
         lessThanFiveRoundsWon = playerWins < 5 && computerWins < 5;
-        currentRound = roundCounter < buttonClickCounter;
+        currentRound = false;
 
         console.log(roundResult);
         console.log(`You won ${playerWins} ${playerRounds}`);
