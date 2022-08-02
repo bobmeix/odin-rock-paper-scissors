@@ -6,7 +6,7 @@ let playerWins = 0;
 let computerWins = 0;
 let roundCounter = 0;
 let lessThanFiveRoundsWon = true;
-let playerName; // = prompt('Tell me your Name...please!');
+let playerName = prompt('Tell me your Name...please!');
 
 const rockButton = document.querySelector('#r');
 rockButton.addEventListener('click', game);
