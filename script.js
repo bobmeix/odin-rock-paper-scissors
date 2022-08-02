@@ -5,6 +5,7 @@ let playerChoice;
 let playerWins = 0;
 let computerWins = 0;
 let roundCounter = 0;
+let lessThanFiveRoundsWon = true;
 let playerName; // = prompt('Tell me your Name...please!');
 
 const rockButton = document.querySelector('#r');
@@ -23,6 +24,19 @@ function getButtonValue(e) {
 }
 
 function showGameRules() {
+    const output = document.querySelector('.output-text');
+    output.innerHTML = `<p>Hi ${playerName}!</p>
+                        <p>Play: ROCK PAPER SCISSORS against the computer!</p>
+                        <p>The rules are simple:</p>
+                        <p>Rock beats Scissors</p>
+                        <p>Paper beats Rock</p>
+                        <p>Scissors beats Paper</p>
+                        <p>In case of a tie, nobody wins the round</p>
+                        <p>Choose your weapon, wisely!</p>
+                        <p>Push a button...</p>
+                        <p>Good luck!</p>
+                        <p>The first one to win 5 rounds, wins the game!</p>`;
+
     console.log(`Hi ${playerName}!`);
     console.log('Play: ROCK PAPER SCISSORS against the computer!');
     console.log('The rules are simple:');
@@ -40,11 +54,15 @@ function showGameRules() {
 function getComputerChoice() {
     let randomNumber = Math.floor(Math.random() * 3);
     let computerChoice = randomNumber === 0 ? rock : randomNumber === 1 ? paper : scissors;
+    
+    const output = document.querySelector('.output-text');
+    output.innerHTML += `<p>Computer: ${computerChoice}</p>`;
     console.log('Computer:', computerChoice);
+    
     return computerChoice;
 }
 
-function getPlayerChoice() {    
+function getPlayerChoice() {
     //let playerChoice = prompt('Choose your Weapon: Rock, Paper or Scissors');
     // let wrongInput = (playerChoice !== 'r' && playerChoice !== 'p' && playerChoice !== 's');
     // while (wrongInput) {
@@ -57,6 +75,9 @@ function getPlayerChoice() {
                    playerChoice === 'p' ? paper :
                    playerChoice === 's' ? scissors :
                    null;
+    const output = document.querySelector('.output-text');
+    output.innerHTML = `<p>Round no. ${roundCounter}</p>
+                        <p>${playerName}: ${playerChoice}</p>`;
     console.log(`Round no. ${roundCounter}`);
     console.log(`${playerName}:`, playerChoice);
     return playerChoice;
@@ -96,16 +117,20 @@ function playRound(playerSelection, computerSelection) {
 
 function game(e) {
     playerChoice = getButtonValue(e);
-    let lessThanFiveRoundsWon = true;
     let currentRound = true;
-    
+
     while (lessThanFiveRoundsWon && currentRound) {
-        let roundResult = playRound(getPlayerChoice(), getComputerChoice());        
+        let roundResult = playRound(getPlayerChoice(), getComputerChoice());
         let playerRounds = playerWins === 1 ? 'round' : 'rounds';
         let computerRounds = computerWins === 1 ? 'round' : 'rounds';
 
         lessThanFiveRoundsWon = playerWins < 5 && computerWins < 5;
         currentRound = false;
+
+        const output = document.querySelector('.output-text');
+        output.innerHTML += `<p>${roundResult}</p>
+                        <p>You won ${playerWins} ${playerRounds}</p>
+                        <p>The computer won ${computerWins} ${computerRounds}</p>`;
 
         console.log(roundResult);
         console.log(`You won ${playerWins} ${playerRounds}`);
@@ -114,8 +139,12 @@ function game(e) {
     }
 
     if (playerWins === 5) {
+        const output = document.querySelector('.output-text');
+        output.innerHTML += `<p>Congratulations ${playerName}! You won the game!</p>`;
         console.log(`Congratulations ${playerName}! You won the game!`);
     } else if (computerWins === 5) {
+        const output = document.querySelector('.output-text');
+        output.innerHTML += `<p>Sorry ${playerName}! You lost this time!</p>`;
         console.log(`Sorry ${playerName}! You lost this time!`);
     }
 }
