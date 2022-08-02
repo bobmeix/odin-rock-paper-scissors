@@ -1,12 +1,20 @@
 * {box-sizing: border-box;}
 
 .output-text {
-    width: 400px;
-    height: 250px;
+    margin-top: 20px;
+    width: 380px;
     border: 2px solid black;
     border-radius: 5px;
 }
 
 .output-text p {
-    margin: 3px 10px;
+    margin: 2px 10px;
+}
+
+.output-text :first-child {
+    margin-top: 10px;
+}
+
+.output-text :last-child {
+    margin-bottom: 10px;
 }
