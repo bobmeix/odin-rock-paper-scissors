@@ -1,13 +1,27 @@
 const rock = 'rock';
 const paper = 'paper';
 const scissors = 'scissors';
+let playerChoice;
 let playerWins = 0;
 let computerWins = 0;
 let roundCounter = 0;
-let playerName = prompt('Tell me your Name...please!');
+let buttonClickCounter = 0;
+let playerName; // = prompt('Tell me your Name...please!');
 
-if (playerName === null || playerName === '') {
+const rockButton = document.querySelector('#r');
+rockButton.addEventListener('click', game);
+const paperButton = document.querySelector('#p');
+paperButton.addEventListener('click', game);
+const scissorsButton = document.querySelector('#s');
+scissorsButton.addEventListener('click', game);
+
+if (playerName === null || playerName === '' || playerName === undefined) {
     playerName = 'Player';
+}
+
+function getButtonValue(e) {
+    buttonClickCounter++;
+    return e.target.value;
 }
 
 function showGameRules() {
@@ -32,14 +46,14 @@ function getComputerChoice() {
     return computerChoice;
 }
 
-function getPlayerChoice() {
-    let playerChoice = prompt('Choose your Weapon: Rock, Paper or Scissors');
-    let wrongInput = (playerChoice !== 'r' && playerChoice !== 'p' && playerChoice !== 's');
-    while (wrongInput) {
-        alert(`You should input:   r,   p   or   s.`);
-        playerChoice = prompt('Choose your Weapon: Rock, Paper or Scissors');
-        wrongInput = (playerChoice !== 'r' && playerChoice !== 'p' && playerChoice !== 's');
-    }
+function getPlayerChoice() {    
+    //let playerChoice = prompt('Choose your Weapon: Rock, Paper or Scissors');
+    // let wrongInput = (playerChoice !== 'r' && playerChoice !== 'p' && playerChoice !== 's');
+    // while (wrongInput) {
+    //     alert(`You should input:   r,   p   or   s.`);
+    //     playerChoice = prompt('Choose your Weapon: Rock, Paper or Scissors');
+    //     wrongInput = (playerChoice !== 'r' && playerChoice !== 'p' && playerChoice !== 's');
+    // }
     roundCounter++;
     playerChoice = playerChoice === 'r' ? rock :
                    playerChoice === 'p' ? paper :
@@ -82,16 +96,18 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-function game() {
-    showGameRules();
+function game(e) {
+    playerChoice = getButtonValue(e);
     let lessThanFiveRoundsWon = true;
-
-    while (lessThanFiveRoundsWon) {
+    let currentRound = true;
+    
+    while (lessThanFiveRoundsWon && currentRound) {
         let roundResult = playRound(getPlayerChoice(), getComputerChoice());        
         let playerRounds = playerWins === 1 ? 'round' : 'rounds';
         let computerRounds = computerWins === 1 ? 'round' : 'rounds';
 
         lessThanFiveRoundsWon = playerWins < 5 && computerWins < 5;
+        currentRound = roundCounter < buttonClickCounter;
 
         console.log(roundResult);
         console.log(`You won ${playerWins} ${playerRounds}`);
@@ -106,4 +122,4 @@ function game() {
     }
 }
 
-game();
+showGameRules();
