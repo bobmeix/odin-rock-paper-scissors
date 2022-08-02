@@ -14,6 +14,8 @@ const paperButton = document.querySelector('#p');
 paperButton.addEventListener('click', game);
 const scissorsButton = document.querySelector('#s');
 scissorsButton.addEventListener('click', game);
+const replayButton = document.querySelector('.replay');
+replayButton.addEventListener('click', replayGame);
 
 if (playerName === null || playerName === '' || playerName === undefined) {
     playerName = 'Player';
@@ -147,6 +149,21 @@ function game(e) {
         output.innerHTML += `<p>Sorry ${playerName}! You lost this time!</p>`;
         console.log(`Sorry ${playerName}! You lost this time!`);
     }
+
+    finishGame();
+}
+
+function finishGame() {
+    if (!lessThanFiveRoundsWon) {
+        rockButton.setAttribute('disabled', '');
+        paperButton.setAttribute('disabled', '');
+        scissorsButton.setAttribute('disabled', '');
+        replayButton.classList.toggle('replay');
+    }
+}
+
+function replayGame() {
+    window.location.reload();
 }
 
 showGameRules();
