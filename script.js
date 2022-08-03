@@ -117,11 +117,11 @@ function getPlayerChoice() {
 function playRound(playerSelection, computerSelection) {
     const playerSelectionFirstCapital = playerSelection[0].toUpperCase() + playerSelection.slice(1);
     const computerSelectionFirstCapital = computerSelection[0].toUpperCase() + computerSelection.slice(1);
-    const youWin = `<b>You Win!</b>`;
+    const youWin = `You Win!`;
     const winComment = ` ${playerSelectionFirstCapital} beats ${computerSelectionFirstCapital}!`;
-    const youLose = `<b>You Lose!</b>`;
+    const youLose = `You Lose!`;
     const loseComment = ` ${computerSelectionFirstCapital} beats ${playerSelectionFirstCapital}!`;
-    const tie = `<b>It's a tie!</b>`;
+    const tie = `It's a tie!`;
 
     if (playerSelection === rock && computerSelection === scissors) {
         playerWins++;
@@ -159,7 +159,7 @@ function game(e) {
         currentRound = false;
 
         const output = document.querySelector('.output-text');
-        output.innerHTML += `<p>${roundResult}</p>
+        output.innerHTML += `<p><b>${roundResult}</b></p>
                         <p><b>You won ${playerWins} ${playerRounds}</b></p>
                         <p><b>The computer won ${computerWins} ${computerRounds}</b></p>`;
 
