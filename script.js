@@ -2,42 +2,82 @@ const rock = 'rock';
 const paper = 'paper';
 const scissors = 'scissors';
 let playerChoice;
+let computerChoice;
+let timeout;
 let playerWins = 0;
 let computerWins = 0;
 let roundCounter = 0;
 let lessThanFiveRoundsWon = true;
 let playerName = prompt('Tell me your Name...please!');
 
-const rockButton = document.querySelector('#r');
-rockButton.addEventListener('click', game);
-const paperButton = document.querySelector('#p');
-paperButton.addEventListener('click', game);
-const scissorsButton = document.querySelector('#s');
-scissorsButton.addEventListener('click', game);
-const replayButton = document.querySelector('.replay');
-replayButton.addEventListener('click', replayGame);
-
 if (playerName === null || playerName === '' || playerName === undefined) {
     playerName = 'Player';
 }
 
+const rockButton = document.querySelector(`#${rock}`);
+rockButton.addEventListener('click', game);
+rockButton.addEventListener('transitionend', removeTransition);
+const paperButton = document.querySelector(`#${paper}`);
+paperButton.addEventListener('click', game);
+paperButton.addEventListener('transitionend', removeTransition);
+const scissorsButton = document.querySelector(`#${scissors}`);
+scissorsButton.addEventListener('click', game);
+scissorsButton.addEventListener('transitionend', removeTransition);
+const replayButton = document.querySelector('.replay');
+replayButton.addEventListener('click', delayReplayGame);
+replayButton.addEventListener('click', addReplayButtonEffect);
+replayButton.addEventListener('transitionend', removeTransition);
+
+
+const leftOutput = document.querySelector('.left');
+const rightOutput = document.querySelector('.right');
+const playerDefImg = document.createElement('img');
+const playerImg = document.createElement('img');
+const compDefImg = document.createElement('img');
+const compImg = document.createElement('img');
+const playerOutputTitle = document.createElement('p');
+
+playerDefImg.setAttribute('src', 'player.png');
+playerDefImg.setAttribute('alt', 'player');
+playerDefImg.setAttribute('width', '120');
+compDefImg.setAttribute('src', 'computer.png');
+compDefImg.setAttribute('alt', 'computer');
+compDefImg.setAttribute('width', '120');
+
+playerOutputTitle.textContent = `${playerName}`;
+leftOutput.appendChild(playerOutputTitle);
+leftOutput.appendChild(playerDefImg);
+rightOutput.appendChild(compDefImg);
+
+
 function getButtonValue(e) {
-    return e.target.value;
+    document.querySelector(`#${e.target.id}`).classList.add('pushed');
+    replayButton.classList.add('replay-transition');
+    return e.target.alt;
+}
+
+function removeTransition(e) {
+    if (e.propertyName !== 'transform') return;
+    e.target.classList.remove('pushed');
+}
+
+function addReplayButtonEffect() {
+    replayButton.classList.add('pushed');
 }
 
 function showGameRules() {
     const output = document.querySelector('.output-text');
-    output.innerHTML = `<p>Hi ${playerName}!</p>
+    output.innerHTML = `<p><b><u>Hi ${playerName}!</b></u></p>
                         <p>Play: ROCK PAPER SCISSORS against the computer!</p>
                         <p>The rules are simple:</p>
-                        <p>Rock beats Scissors</p>
-                        <p>Paper beats Rock</p>
-                        <p>Scissors beats Paper</p>
+                        <p><b>Rock beats Scissors</b></p>
+                        <p><b>Paper beats Rock</b></p>
+                        <p><b>Scissors beats Paper</b></p>
                         <p>In case of a tie, nobody wins the round</p>
                         <p>Choose your weapon, wisely!</p>
-                        <p>Push a button...</p>
+                        <p><b>Push a button...</b></p>
                         <p>Good luck!</p>
-                        <p>The first one to win 5 rounds, wins the game!</p>`;
+                        <p><u>The first one to win 5 rounds, wins the game!</u></p>`;
 
     console.log(`Hi ${playerName}!`);
     console.log('Play: ROCK PAPER SCISSORS against the computer!');
@@ -55,23 +95,19 @@ function showGameRules() {
 
 function getComputerChoice() {
     let randomNumber = Math.floor(Math.random() * 3);
-    let computerChoice = randomNumber === 0 ? rock : randomNumber === 1 ? paper : scissors;
-    
+    computerChoice = randomNumber === 0 ? rock : randomNumber === 1 ? paper : scissors;
+
     const output = document.querySelector('.output-text');
     output.innerHTML += `<p>Computer: ${computerChoice}</p>`;
     console.log('Computer:', computerChoice);
-    
+
     return computerChoice;
 }
 
 function getPlayerChoice() {
     roundCounter++;
-    playerChoice = playerChoice === 'r' ? rock :
-                   playerChoice === 'p' ? paper :
-                   playerChoice === 's' ? scissors :
-                   null;
     const output = document.querySelector('.output-text');
-    output.innerHTML = `<p>Round no. ${roundCounter}</p>
+    output.innerHTML = `<p><b><u>Round no. ${roundCounter}</u></b></p>
                         <p>${playerName}: ${playerChoice}</p>`;
     console.log(`Round no. ${roundCounter}`);
     console.log(`${playerName}:`, playerChoice);
@@ -123,23 +159,33 @@ function game(e) {
         currentRound = false;
 
         const output = document.querySelector('.output-text');
-        output.innerHTML += `<p>${roundResult}</p>
-                        <p>You won ${playerWins} ${playerRounds}</p>
-                        <p>The computer won ${computerWins} ${computerRounds}</p>`;
+        output.innerHTML += `<p><b>${roundResult}</b></p>
+                        <p><b>You won ${playerWins} ${playerRounds}</b></p>
+                        <p><b>The computer won ${computerWins} ${computerRounds}</b></p>`;
 
         console.log(roundResult);
         console.log(`You won ${playerWins} ${playerRounds}`);
         console.log(`The computer won ${computerWins} ${computerRounds}`);
         console.log('-------------------------------------------------');
+
+        playerImg.setAttribute('src', `${e.target.alt}.png`);
+        playerImg.setAttribute('width', '120');
+        leftOutput.removeChild(leftOutput.lastChild);        
+        leftOutput.appendChild(playerImg);
+
+        compImg.setAttribute('src', `${computerChoice}.png`);
+        compImg.setAttribute('width', '120');
+        rightOutput.removeChild(rightOutput.lastChild);
+        rightOutput.appendChild(compImg);
     }
 
     if (playerWins === 5) {
         const output = document.querySelector('.output-text');
-        output.innerHTML += `<p>Congratulations ${playerName}! You won the game!</p>`;
+        output.innerHTML += `<p><b><i>Congratulations ${playerName}! You won the game!</i></b></p>`;
         console.log(`Congratulations ${playerName}! You won the game!`);
     } else if (computerWins === 5) {
         const output = document.querySelector('.output-text');
-        output.innerHTML += `<p>Sorry ${playerName}! You lost this time!</p>`;
+        output.innerHTML += `<p><b><i>Sorry ${playerName}! You lost this time!</i></b></p>`;
         console.log(`Sorry ${playerName}! You lost this time!`);
     }
 
@@ -148,11 +194,16 @@ function game(e) {
 
 function finishGame() {
     if (!lessThanFiveRoundsWon) {
-        rockButton.setAttribute('disabled', '');
-        paperButton.setAttribute('disabled', '');
-        scissorsButton.setAttribute('disabled', '');
+        rockButton.removeEventListener('click', game);
+        paperButton.removeEventListener('click', game);
+        scissorsButton.removeEventListener('click', game);
         replayButton.classList.toggle('replay');
     }
+}
+
+function delayReplayGame() {
+    console.log('Start 500ms timeout!');
+    timeout = setTimeout(replayGame, 500);
 }
 
 function replayGame() {
