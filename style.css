@@ -22,11 +22,11 @@ p {
 }
 
 #rock, #paper, #scissors {
-    transition: all .1s ease;
+    transition: all .07s ease;
 }
 
 .replay-transition {
-    transition: all .1s ease;
+    transition: all .07s ease;
 }
 
 .replay {
@@ -34,7 +34,15 @@ p {
 }
 
 .pushed {
-    transform: scale(1.2);
+    transform: scale(1.15);
+}
+
+.input-buttons {
+    display: flex;
+}
+
+.input-button:hover {
+    transform: scale(1.03);
 }
 
 .game-output {
@@ -81,10 +89,4 @@ p {
 
 .output-text :last-child {
     margin-bottom: 10px;
-}
-
-button {
-    padding: 15px;
-    margin: 6px;
-    font-size: 20px;
 }
