@@ -2,11 +2,16 @@ const rock = 'rock';
 const paper = 'paper';
 const scissors = 'scissors';
 let playerChoice;
+let computerChoice;
 let playerWins = 0;
 let computerWins = 0;
 let roundCounter = 0;
 let lessThanFiveRoundsWon = true;
 let playerName = prompt('Tell me your Name...please!');
+
+if (playerName === null || playerName === '' || playerName === undefined) {
+    playerName = 'Player';
+}
 
 const rockButton = document.querySelector(`#${rock}`);
 rockButton.addEventListener('click', game);
@@ -17,9 +22,26 @@ scissorsButton.addEventListener('click', game);
 const replayButton = document.querySelector('.replay');
 replayButton.addEventListener('click', replayGame);
 
-if (playerName === null || playerName === '' || playerName === undefined) {
-    playerName = 'Player';
-}
+const leftOutput = document.querySelector('.left');
+const rightOutput = document.querySelector('.right');
+const playerDefImg = document.createElement('img');
+const playerImg = document.createElement('img');
+const compDefImg = document.createElement('img');
+const compImg = document.createElement('img');
+const playerOutputTitle = document.createElement('p');
+
+playerDefImg.setAttribute('src', 'player.png');
+playerDefImg.setAttribute('alt', 'player');
+playerDefImg.setAttribute('width', '120');
+compDefImg.setAttribute('src', 'computer.png');
+compDefImg.setAttribute('alt', 'computer');
+compDefImg.setAttribute('width', '120');
+
+playerOutputTitle.textContent = `${playerName}`;
+leftOutput.appendChild(playerOutputTitle);
+leftOutput.appendChild(playerDefImg);
+rightOutput.appendChild(compDefImg);
+
 
 function getButtonValue(e) {
     return e.target.alt;
@@ -55,12 +77,12 @@ function showGameRules() {
 
 function getComputerChoice() {
     let randomNumber = Math.floor(Math.random() * 3);
-    let computerChoice = randomNumber === 0 ? rock : randomNumber === 1 ? paper : scissors;
-    
+    computerChoice = randomNumber === 0 ? rock : randomNumber === 1 ? paper : scissors;
+
     const output = document.querySelector('.output-text');
     output.innerHTML += `<p>Computer: ${computerChoice}</p>`;
     console.log('Computer:', computerChoice);
-    
+
     return computerChoice;
 }
 
@@ -127,6 +149,16 @@ function game(e) {
         console.log(`You won ${playerWins} ${playerRounds}`);
         console.log(`The computer won ${computerWins} ${computerRounds}`);
         console.log('-------------------------------------------------');
+
+        playerImg.setAttribute('src', `${e.target.alt}.png`);
+        playerImg.setAttribute('width', '120');
+        leftOutput.removeChild(leftOutput.lastChild);        
+        leftOutput.appendChild(playerImg);
+
+        compImg.setAttribute('src', `${computerChoice}.png`);
+        compImg.setAttribute('width', '120');
+        rightOutput.removeChild(rightOutput.lastChild);
+        rightOutput.appendChild(compImg);
     }
 
     if (playerWins === 5) {

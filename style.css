@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap');
+
 * {box-sizing: border-box;}
 
 body {
@@ -8,11 +10,44 @@ body {
     align-items: center;
 }
 
-.output-text {
+h1 {
+    font-family: 'Syne Mono', monospace;
+    font-weight: 100;
+    margin: 20px 0 50px 0;
+}
+
+.game-output {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.output-images {
+    display: flex;
+    justify-content: space-evenly;
+    width: 380px;
+}
+
+.left, .right {
     margin: 20px 0;
+    width: 124px;
+    height: 190px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.left p, .right p {
+    margin: 0;
+    text-align: center;
+}
+
+.output-text {
+    margin: 0 0 20px 0;
     width: 380px;
     border: 2px solid black;
     border-radius: 5px;
+    text-align: center;
 }
 
 .output-text p {
