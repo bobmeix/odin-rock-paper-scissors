@@ -17,7 +17,8 @@ h1 {
 }
 
 p {
-    font-family: 'Share Tech Mono', monospace; 
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 14px;
 }
 
 #rock, #paper, #scissors {
