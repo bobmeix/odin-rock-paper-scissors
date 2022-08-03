@@ -8,11 +8,11 @@ let roundCounter = 0;
 let lessThanFiveRoundsWon = true;
 let playerName = prompt('Tell me your Name...please!');
 
-const rockButton = document.querySelector('#r');
+const rockButton = document.querySelector(`#${rock}`);
 rockButton.addEventListener('click', game);
-const paperButton = document.querySelector('#p');
+const paperButton = document.querySelector(`#${paper}`);
 paperButton.addEventListener('click', game);
-const scissorsButton = document.querySelector('#s');
+const scissorsButton = document.querySelector(`#${scissors}`);
 scissorsButton.addEventListener('click', game);
 const replayButton = document.querySelector('.replay');
 replayButton.addEventListener('click', replayGame);
@@ -22,7 +22,7 @@ if (playerName === null || playerName === '' || playerName === undefined) {
 }
 
 function getButtonValue(e) {
-    return e.target.value;
+    return e.target.alt;
 }
 
 function showGameRules() {
@@ -65,18 +65,7 @@ function getComputerChoice() {
 }
 
 function getPlayerChoice() {
-    //let playerChoice = prompt('Choose your Weapon: Rock, Paper or Scissors');
-    // let wrongInput = (playerChoice !== 'r' && playerChoice !== 'p' && playerChoice !== 's');
-    // while (wrongInput) {
-    //     alert(`You should input:   r,   p   or   s.`);
-    //     playerChoice = prompt('Choose your Weapon: Rock, Paper or Scissors');
-    //     wrongInput = (playerChoice !== 'r' && playerChoice !== 'p' && playerChoice !== 's');
-    // }
     roundCounter++;
-    playerChoice = playerChoice === 'r' ? rock :
-                   playerChoice === 'p' ? paper :
-                   playerChoice === 's' ? scissors :
-                   null;
     const output = document.querySelector('.output-text');
     output.innerHTML = `<p>Round no. ${roundCounter}</p>
                         <p>${playerName}: ${playerChoice}</p>`;
@@ -155,9 +144,9 @@ function game(e) {
 
 function finishGame() {
     if (!lessThanFiveRoundsWon) {
-        rockButton.setAttribute('disabled', '');
-        paperButton.setAttribute('disabled', '');
-        scissorsButton.setAttribute('disabled', '');
+        rockButton.removeEventListener('click', game);
+        paperButton.removeEventListener('click', game);
+        scissorsButton.removeEventListener('click', game);
         replayButton.classList.toggle('replay');
     }
 }
