@@ -67,17 +67,17 @@ function addReplayButtonEffect() {
 
 function showGameRules() {
     const output = document.querySelector('.output-text');
-    output.innerHTML = `<p>Hi ${playerName}!</p>
+    output.innerHTML = `<p><b><u>Hi ${playerName}!</b></u></p>
                         <p>Play: ROCK PAPER SCISSORS against the computer!</p>
                         <p>The rules are simple:</p>
-                        <p>Rock beats Scissors</p>
-                        <p>Paper beats Rock</p>
-                        <p>Scissors beats Paper</p>
+                        <p><b>Rock beats Scissors</b></p>
+                        <p><b>Paper beats Rock</b></p>
+                        <p><b>Scissors beats Paper</b></p>
                         <p>In case of a tie, nobody wins the round</p>
                         <p>Choose your weapon, wisely!</p>
-                        <p>Push a button...</p>
+                        <p><b>Push a button...</b></p>
                         <p>Good luck!</p>
-                        <p>The first one to win 5 rounds, wins the game!</p>`;
+                        <p><u>The first one to win 5 rounds, wins the game!</u></p>`;
 
     console.log(`Hi ${playerName}!`);
     console.log('Play: ROCK PAPER SCISSORS against the computer!');
@@ -107,7 +107,7 @@ function getComputerChoice() {
 function getPlayerChoice() {
     roundCounter++;
     const output = document.querySelector('.output-text');
-    output.innerHTML = `<p>Round no. ${roundCounter}</p>
+    output.innerHTML = `<p><b><u>Round no. ${roundCounter}</u></b></p>
                         <p>${playerName}: ${playerChoice}</p>`;
     console.log(`Round no. ${roundCounter}`);
     console.log(`${playerName}:`, playerChoice);
@@ -117,11 +117,11 @@ function getPlayerChoice() {
 function playRound(playerSelection, computerSelection) {
     const playerSelectionFirstCapital = playerSelection[0].toUpperCase() + playerSelection.slice(1);
     const computerSelectionFirstCapital = computerSelection[0].toUpperCase() + computerSelection.slice(1);
-    const youWin = `You Win!`;
+    const youWin = `<b>You Win!</b>`;
     const winComment = ` ${playerSelectionFirstCapital} beats ${computerSelectionFirstCapital}!`;
-    const youLose = `You Lose!`;
+    const youLose = `<b>You Lose!</b>`;
     const loseComment = ` ${computerSelectionFirstCapital} beats ${playerSelectionFirstCapital}!`;
-    const tie = `It's a tie!`;
+    const tie = `<b>It's a tie!</b>`;
 
     if (playerSelection === rock && computerSelection === scissors) {
         playerWins++;
@@ -160,8 +160,8 @@ function game(e) {
 
         const output = document.querySelector('.output-text');
         output.innerHTML += `<p>${roundResult}</p>
-                        <p>You won ${playerWins} ${playerRounds}</p>
-                        <p>The computer won ${computerWins} ${computerRounds}</p>`;
+                        <p><b>You won ${playerWins} ${playerRounds}</b></p>
+                        <p><b>The computer won ${computerWins} ${computerRounds}</b></p>`;
 
         console.log(roundResult);
         console.log(`You won ${playerWins} ${playerRounds}`);
@@ -181,11 +181,11 @@ function game(e) {
 
     if (playerWins === 5) {
         const output = document.querySelector('.output-text');
-        output.innerHTML += `<p>Congratulations ${playerName}! You won the game!</p>`;
+        output.innerHTML += `<p><b><i>Congratulations ${playerName}! You won the game!</i></b></p>`;
         console.log(`Congratulations ${playerName}! You won the game!`);
     } else if (computerWins === 5) {
         const output = document.querySelector('.output-text');
-        output.innerHTML += `<p>Sorry ${playerName}! You lost this time!</p>`;
+        output.innerHTML += `<p><b><i>Sorry ${playerName}! You lost this time!</i></b></p>`;
         console.log(`Sorry ${playerName}! You lost this time!`);
     }
 
