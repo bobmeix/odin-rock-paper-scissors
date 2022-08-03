@@ -16,6 +16,22 @@ h1 {
     margin: 20px 0 50px 0;
 }
 
+#rock, #paper, #scissors {
+    transition: all .1s ease;
+}
+
+.replay-transition {
+    transition: all .1s ease;
+}
+
+.replay {
+    visibility: hidden;
+}
+
+.pushed {
+    transform: scale(1.1);
+}
+
 .game-output {
     display: flex;
     flex-direction: column;
@@ -60,10 +76,6 @@ h1 {
 
 .output-text :last-child {
     margin-bottom: 10px;
-}
-
-.replay {
-    visibility: hidden;
 }
 
 button {

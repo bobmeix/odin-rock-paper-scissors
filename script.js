@@ -3,6 +3,7 @@ const paper = 'paper';
 const scissors = 'scissors';
 let playerChoice;
 let computerChoice;
+let timeout;
 let playerWins = 0;
 let computerWins = 0;
 let roundCounter = 0;
@@ -15,12 +16,18 @@ if (playerName === null || playerName === '' || playerName === undefined) {
 
 const rockButton = document.querySelector(`#${rock}`);
 rockButton.addEventListener('click', game);
+rockButton.addEventListener('transitionend', removeTransition);
 const paperButton = document.querySelector(`#${paper}`);
 paperButton.addEventListener('click', game);
+paperButton.addEventListener('transitionend', removeTransition);
 const scissorsButton = document.querySelector(`#${scissors}`);
 scissorsButton.addEventListener('click', game);
+scissorsButton.addEventListener('transitionend', removeTransition);
 const replayButton = document.querySelector('.replay');
-replayButton.addEventListener('click', replayGame);
+replayButton.addEventListener('click', delayReplayGame);
+replayButton.addEventListener('click', addReplayButtonEffect);
+replayButton.addEventListener('transitionend', removeTransition);
+
 
 const leftOutput = document.querySelector('.left');
 const rightOutput = document.querySelector('.right');
@@ -44,7 +51,18 @@ rightOutput.appendChild(compDefImg);
 
 
 function getButtonValue(e) {
+    document.querySelector(`#${e.target.id}`).classList.add('pushed');
+    replayButton.classList.add('replay-transition');
     return e.target.alt;
+}
+
+function removeTransition(e) {
+    if (e.propertyName !== 'transform') return;
+    e.target.classList.remove('pushed');
+}
+
+function addReplayButtonEffect() {
+    replayButton.classList.add('pushed');
 }
 
 function showGameRules() {
@@ -181,6 +199,11 @@ function finishGame() {
         scissorsButton.removeEventListener('click', game);
         replayButton.classList.toggle('replay');
     }
+}
+
+function delayReplayGame() {
+    console.log('Start 500ms timeout!');
+    timeout = setTimeout(replayGame, 500);
 }
 
 function replayGame() {
