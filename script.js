@@ -181,11 +181,11 @@ function game(e) {
 
     if (playerWins === 5) {
         const output = document.querySelector('.output-text');
-        output.innerHTML += `<p><b><i>Congratulations ${playerName}! You won the game!</i></b></p>`;
+        output.innerHTML += `<p style="color: #C13E22;"><b><i>Congratulations ${playerName}! You won the game!</i></b></p>`;
         console.log(`Congratulations ${playerName}! You won the game!`);
     } else if (computerWins === 5) {
         const output = document.querySelector('.output-text');
-        output.innerHTML += `<p><b><i>Sorry ${playerName}! You lost this time!</i></b></p>`;
+        output.innerHTML += `<p style="color: #C13E22;"><b><i>Sorry ${playerName}! You lost this time!</i></b></p>`;
         console.log(`Sorry ${playerName}! You lost this time!`);
     }
 
