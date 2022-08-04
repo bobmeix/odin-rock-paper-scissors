@@ -14,15 +14,12 @@ if (playerName === null || playerName === '' || playerName === undefined) {
     playerName = 'Player';
 }
 
-const rockButton = document.querySelector(`#${rock}`);
-rockButton.addEventListener('click', game);
-rockButton.addEventListener('transitionend', removeTransition);
-const paperButton = document.querySelector(`#${paper}`);
-paperButton.addEventListener('click', game);
-paperButton.addEventListener('transitionend', removeTransition);
-const scissorsButton = document.querySelector(`#${scissors}`);
-scissorsButton.addEventListener('click', game);
-scissorsButton.addEventListener('transitionend', removeTransition);
+const gameButtons = document.querySelectorAll('.input-button');
+gameButtons.forEach(button => {
+    button.addEventListener('click', game);
+    button.addEventListener('transitionend', removeTransition);
+});
+
 const replayButton = document.querySelector('.replay');
 replayButton.addEventListener('click', delayReplayGame);
 replayButton.addEventListener('click', addReplayButtonEffect);
@@ -194,9 +191,9 @@ function game(e) {
 
 function finishGame() {
     if (!lessThanFiveRoundsWon) {
-        rockButton.removeEventListener('click', game);
-        paperButton.removeEventListener('click', game);
-        scissorsButton.removeEventListener('click', game);
+        gameButtons.forEach(button => {
+            button.removeEventListener('click', game);
+        });
         replayButton.classList.toggle('replay');
     }
 }
