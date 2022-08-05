@@ -101,7 +101,8 @@ function getComputerChoice() {
     return computerChoice;
 }
 
-function getPlayerChoice() {
+function getPlayerChoice(e) {
+    playerChoice = getButtonValue(e);
     roundCounter++;
     const output = document.querySelector('.output-text');
     output.innerHTML = `<p><b><u>Round no. ${roundCounter}</u></b></p>
@@ -144,11 +145,10 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function game(e) {
-    playerChoice = getButtonValue(e);
     let currentRound = true;
 
     while (lessThanFiveRoundsWon && currentRound) {
-        let roundResult = playRound(getPlayerChoice(), getComputerChoice());
+        let roundResult = playRound(getPlayerChoice(e), getComputerChoice());
         let playerRounds = playerWins === 1 ? 'round' : 'rounds';
         let computerRounds = computerWins === 1 ? 'round' : 'rounds';
 
