@@ -49,7 +49,7 @@ rightOutput.appendChild(compDefImg);
 
 function getButtonValue(e) {
     document.querySelector(`#${e.target.id}`).classList.add('pushed');
-    replayButton.classList.add('replay-transition');
+    replayButton.classList.add('replay-transition'); //moved here to prevent the flashing of this button at page load
     return e.target.alt;
 }
 
