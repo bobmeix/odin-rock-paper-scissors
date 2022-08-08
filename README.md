@@ -1,4 +1,6 @@
-# odin-rock-paper-scissors
+# rock-paper-scissors
+First JavaScript project from The Odin Project
+
 Rock Paper Scissors - browser game with simple UI
 
 I haven't deleted the console.log messages on purpose. They serve the
