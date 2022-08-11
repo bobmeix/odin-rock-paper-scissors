@@ -3,6 +3,8 @@ First JavaScript project from The Odin Project
 
 Rock Paper Scissors - browser game with simple UI
 
+[Live Link](https://bobmeix.github.io/rock-paper-scissors/)
+
 I haven't deleted the console.log messages on purpose. They serve the
 role of a "round history". The code looks a bit cluttered because of
 that, but it's an acceptable trade off this time.
